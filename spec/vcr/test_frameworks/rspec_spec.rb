@@ -16,6 +16,7 @@ describe VCR::RSpec::Metadata, :skip_vcr_reset do
           'uses a cassette for any examples'
         ])
       end
+      it { expect(VCR.current_cassette.name).to raise_error }
     end
   end
 
