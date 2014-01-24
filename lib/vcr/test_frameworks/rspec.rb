@@ -27,6 +27,10 @@ module VCR
 
             cassette_name = options.delete(:cassette_name) ||
                             vcr_cassette_name_for[example.metadata]
+
+            if cassette_name.strip[-1,1] == "/"
+              raise VCR::Errors::NotSupportedError.new "VCR does not support rspec one line syntax 'it {}' found on line #{example.metadata[:line_number]}"
+            end
             VCR.insert_cassette(cassette_name, options)
           end
 
